@@ -33,7 +33,7 @@ To use Mantle in your own project, just drag the `Mantle.framework` in to the `F
 
 	![](https://github.com/YuAo/Mantle-iOS-Framework-Builder/raw/master/Screenshots/Mantle-Framework-File.png)
 
-5. Drag the `Mantle.framework` into the `Frameworks` group in your project. And `#import <Mantle/Mantle.h>` wherever you want to use Mantle.
+5. Drag the `Mantle.framework` into the `Frameworks` group of your project. And `#import <Mantle/Mantle.h>` wherever you want to use Mantle.
 
 	![](https://github.com/YuAo/Mantle-iOS-Framework-Builder/raw/master/Screenshots/Add-Mantle-Framework.png)
 
