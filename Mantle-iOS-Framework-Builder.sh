@@ -20,7 +20,6 @@
 # MANTLE_BUILD_DIRECTORY
 #
 # Mantle Build Directory: The final .framework file will be generated here.
-# Warning: The MANTLE_BUILD_DIRECTORY will be removed then created before each build.
 #
 # -------------------------
 #
@@ -31,8 +30,16 @@
 # -------------------------
 #
 
-readonly MANTLE_CODE_BASE_DIRECTORY="${HOME}/Developer/Open Source Libraries/Mantle/"
-readonly MANTLE_BUILD_DIRECTORY="${HOME}/Desktop/Mantle-iOS-Framework/"
+MANTLE_CODE_BASE_DIRECTORY="${HOME}/Developer/Open Source Libraries/Mantle/"
+if [ MANTLE_CODE_BASE_DIRECTORY"$1" != MANTLE_CODE_BASE_DIRECTORY ]; then
+    MANTLE_CODE_BASE_DIRECTORY="$1"
+fi
+
+MANTLE_BUILD_DIRECTORY="${HOME}/Desktop/Mantle-iOS-Framework/"
+if [ MANTLE_BUILD_DIRECTORY"$2" != MANTLE_BUILD_DIRECTORY ]; then
+    MANTLE_BUILD_DIRECTORY="$2"
+fi
+
 readonly MANTLE_FRAMEWORK_NAME="Mantle"
 
 
@@ -53,8 +60,14 @@ set -e
 # Begin
 
 if [ -d "${MANTLE_BUILD_DIRECTORY}" ]; then
-    echo "Cleaning MANTLE_BUILD_DIRECTORY: ${MANTLE_BUILD_DIRECTORY}"
-    rm -r "${MANTLE_BUILD_DIRECTORY}"
+    read -p "MANTLE_BUILD_DIRECTORY: ${MANTLE_BUILD_DIRECTORY} already exists, it will be overwritten, countinue? (y/n) "
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Cleaning MANTLE_BUILD_DIRECTORY: ${MANTLE_BUILD_DIRECTORY}"
+        rm -rf "${MANTLE_BUILD_DIRECTORY}"
+    else
+        echo "Operation Cancelled."
+        exit 1
+    fi
 fi
 
 cd "${MANTLE_CODE_BASE_DIRECTORY}"

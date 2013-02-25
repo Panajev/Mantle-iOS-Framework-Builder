@@ -21,21 +21,33 @@ To use Mantle in your own project, just drag the `Mantle.framework` in to the `F
 
 1. Download or clone this repository to your Mac.
 
-2. Open `Mantle-iOS-Framework-Builder.sh`
-	
-	Find and edit:
-	
-		readonly MANTLE_CODE_BASE_DIRECTORY="The absolute path to the directory which contains the Mantle.xcodeproj file."
+2. Run the shell script `Mantle-iOS-Framework-Builder.sh`
+
+		cd Mantle-iOS-Framework-Builder/
 		
-3. Run the shell script `Mantle-iOS-Framework-Builder.sh`
+		# for example, the Mantle project is in ~/Developer/Mantle
+		
+		./Mantle-iOS-Framework-Builder.sh ~/Developer/Mantle/
 	
-4. When `Mantle-iOS-Framework-Builder.sh` says "All Done!". You'll find a folder named `Mantle-iOS-Framework` on your Desktop. Open it, and you'll find the `Mantle.framework`.
+3. When `Mantle-iOS-Framework-Builder.sh` says "All Done!". You'll find a folder named `Mantle-iOS-Framework` on your Desktop. Open it, and you'll find the `Mantle.framework`.
 
 	![](https://github.com/YuAo/Mantle-iOS-Framework-Builder/raw/master/Screenshots/Mantle-Framework-File.png)
 
-5. Drag the `Mantle.framework` into the `Frameworks` group of your project. And `#import <Mantle/Mantle.h>` wherever you want to use Mantle.
+4. Drag the `Mantle.framework` into the `Frameworks` group of your project. And `#import <Mantle/Mantle.h>` wherever you want to use Mantle.
 
 	![](https://github.com/YuAo/Mantle-iOS-Framework-Builder/raw/master/Screenshots/Add-Mantle-Framework.png)
+
+### Command Reference
+
+`Mantle-iOS-Framework-Builder.sh` can take 2 parameters.
+
+		Mantle-iOS-Framework-Builder.sh <mantle-project-directory> <output-directory>
+
+`mantle-project-directory`: The absolute path to the directory which contains the Mantle.xcodeproj file. Default is `~/Developer/Open Source Libraries/Mantle/`
+
+`output-directory`: The final .framework file will be generated here. Default is `~/Desktop/Mantle-iOS-Framework/`
+
+You can change the default value by editing `Mantle-iOS-Framework-Builder.sh`
 
 ### License
 
