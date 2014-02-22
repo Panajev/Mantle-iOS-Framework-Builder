@@ -48,11 +48,12 @@ readonly MANTLE_FRAMEWORK_NAME="Mantle"
 
 readonly MANTLE_PROJECT_NAME="Mantle.xcodeproj"
 readonly MANTLE_BUILD_CONFIGURATION_NAME="Release"
-readonly MANTLE_BUILD_SCHEME_NAME="Mantle iOS"
+readonly MANTLE_BUILD_SCHEME_NAME="Mantle-iOS"
 
 readonly IPHONE_OS_SDK_NAME="iphoneos"
 readonly IPHONE_SIMULATOR_SDK_NAME="iphonesimulator"
 
+readonly MANTLE_PRODUCT_NAME="${MANTLE_BUILD_SCHEME_NAME}"
 
 # First of all, we should "Exit on Error"
 set -e
@@ -74,7 +75,7 @@ cd "${MANTLE_CODE_BASE_DIRECTORY}"
 
 echo "Building Mantle (iPhone OS)..."
 
-xcodebuild -project "${MANTLE_PROJECT_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_OS_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}" >/dev/null
+xcodebuild -project "${MANTLE_PROJECT_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_OS_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}"  >/dev/null
 
 echo "Building Mantle (Simulator)..."
 
@@ -93,6 +94,6 @@ cp -a ./Mantle/*.h "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework
 
 echo "Generating Universal Binary File..."
 
-lipo -create "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}-${IPHONE_OS_SDK_NAME}/libMantle.a" "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}-${IPHONE_SIMULATOR_SDK_NAME}/libMantle.a" -output "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework/Versions/A/${MANTLE_FRAMEWORK_NAME}"
+lipo -create "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}-${IPHONE_OS_SDK_NAME}/lib${MANTLE_PRODUCT_NAME}.a" "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}-${IPHONE_SIMULATOR_SDK_NAME}/lib${MANTLE_PRODUCT_NAME}.a" -output "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework/Versions/A/${MANTLE_FRAMEWORK_NAME}"
 
 echo "All Done!"
