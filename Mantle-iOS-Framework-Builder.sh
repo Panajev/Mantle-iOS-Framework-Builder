@@ -46,7 +46,7 @@ readonly MANTLE_FRAMEWORK_NAME="Mantle"
 # Build Settings
 # You should not change these settings.
 
-readonly MANTLE_PROJECT_NAME="Mantle.xcodeproj"
+readonly MANTLE_WORKSPACE_NAME="Mantle.xcworkspace"
 readonly MANTLE_BUILD_CONFIGURATION_NAME="Release"
 readonly MANTLE_BUILD_SCHEME_NAME="Mantle-iOS"
 
@@ -75,11 +75,11 @@ cd "${MANTLE_CODE_BASE_DIRECTORY}"
 
 echo "Building Mantle (iPhone OS)..."
 
-xcodebuild -project "${MANTLE_PROJECT_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_OS_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}"  >/dev/null
+xcodebuild -workspace "${MANTLE_WORKSPACE_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_OS_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}"  >/dev/null
 
 echo "Building Mantle (Simulator)..."
 
-xcodebuild -project "${MANTLE_PROJECT_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_SIMULATOR_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}" >/dev/null
+xcodebuild -workspace "${MANTLE_WORKSPACE_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_SIMULATOR_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}" >/dev/null
 
 echo "Creating Framework Layout..."
 
