@@ -35,7 +35,7 @@ if [ MANTLE_CODE_BASE_DIRECTORY"$1" != MANTLE_CODE_BASE_DIRECTORY ]; then
     MANTLE_CODE_BASE_DIRECTORY="$1"
 fi
 
-MANTLE_BUILD_DIRECTORY="${HOME}/Desktop/Mantle-iOS-Framework/"
+MANTLE_BUILD_DIRECTORY="${HOME}/Desktop/Mantle-OSX-Framework/"
 if [ MANTLE_BUILD_DIRECTORY"$2" != MANTLE_BUILD_DIRECTORY ]; then
     MANTLE_BUILD_DIRECTORY="$2"
 fi
@@ -48,10 +48,9 @@ readonly MANTLE_FRAMEWORK_NAME="Mantle"
 
 readonly MANTLE_WORKSPACE_NAME="Mantle.xcworkspace"
 readonly MANTLE_BUILD_CONFIGURATION_NAME="Release"
-readonly MANTLE_BUILD_SCHEME_NAME="Mantle-iOS"
+readonly MANTLE_BUILD_SCHEME_NAME="Mantle-Mac"
 
-readonly IPHONE_OS_SDK_NAME="iphoneos"
-readonly IPHONE_SIMULATOR_SDK_NAME="iphonesimulator"
+readonly MAC_OS_SDK_NAME="macosx"
 
 readonly MANTLE_PRODUCT_NAME="${MANTLE_BUILD_SCHEME_NAME}"
 
@@ -73,13 +72,9 @@ fi
 
 cd "${MANTLE_CODE_BASE_DIRECTORY}"
 
-echo "Building Mantle (iPhone OS)..."
+echo "Building Mantle (MacOS X)..."
 
-xcodebuild -workspace "${MANTLE_WORKSPACE_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_OS_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}"  >/dev/null
-
-echo "Building Mantle (Simulator)..."
-
-xcodebuild -workspace "${MANTLE_WORKSPACE_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${IPHONE_SIMULATOR_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}" >/dev/null
+xcodebuild -workspace "${MANTLE_WORKSPACE_NAME}" -configuration "${MANTLE_BUILD_CONFIGURATION_NAME}" -scheme "${MANTLE_BUILD_SCHEME_NAME}" -sdk "${MAC_OS_SDK_NAME}" SYMROOT="${MANTLE_BUILD_DIRECTORY}"  >/dev/null
 
 echo "Creating Framework Layout..."
 
@@ -94,6 +89,6 @@ cp -a ./Mantle/*.h "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework
 
 echo "Generating Universal Binary File..."
 
-lipo -create "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}-${IPHONE_OS_SDK_NAME}/lib${MANTLE_PRODUCT_NAME}.a" "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}-${IPHONE_SIMULATOR_SDK_NAME}/lib${MANTLE_PRODUCT_NAME}.a" -output "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework/Versions/A/${MANTLE_FRAMEWORK_NAME}"
+lipo -create "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}/lib${MANTLE_PRODUCT_NAME}.a" -output "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework/Versions/A/${MANTLE_FRAMEWORK_NAME}"
 
 echo "All Done!"
