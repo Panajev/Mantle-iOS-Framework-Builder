@@ -48,11 +48,13 @@ readonly MANTLE_FRAMEWORK_NAME="Mantle"
 
 readonly MANTLE_WORKSPACE_NAME="Mantle.xcworkspace"
 readonly MANTLE_BUILD_CONFIGURATION_NAME="Release"
-readonly MANTLE_BUILD_SCHEME_NAME="Mantle-Mac"
+readonly MANTLE_BUILD_SCHEME_NAME="Mantle Mac"
+readonly MANTLE_LIB_NAME_TEMP="Mantle"
+readonly MANTLE_LIB_NAME="Mantle-Mac"
 
 readonly MAC_OS_SDK_NAME="macosx"
 
-readonly MANTLE_PRODUCT_NAME="${MANTLE_BUILD_SCHEME_NAME}"
+readonly MANTLE_PRODUCT_NAME="${MANTLE_LIB_NAME}"
 
 # First of all, we should "Exit on Error"
 set -e
@@ -89,6 +91,6 @@ cp -a ./Mantle/*.h "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework
 
 echo "Generating Universal Binary File..."
 
-lipo -create "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}/lib${MANTLE_PRODUCT_NAME}.a" -output "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework/Versions/A/${MANTLE_FRAMEWORK_NAME}"
+lipo -create "${MANTLE_BUILD_DIRECTORY}/${MANTLE_BUILD_CONFIGURATION_NAME}/${MANTLE_FRAMEWORK_NAME}.framework/${MANTLE_LIB_NAME_TEMP}" -output "${MANTLE_BUILD_DIRECTORY}/${MANTLE_FRAMEWORK_NAME}.framework/Versions/A/${MANTLE_FRAMEWORK_NAME}"
 
 echo "All Done!"
